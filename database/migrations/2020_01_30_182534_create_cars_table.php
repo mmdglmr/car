@@ -18,9 +18,9 @@ class CreateCarsTable extends Migration
             $table->unsignedBigInteger('car_features_id');
             $table->string('brand');
             $table->string('model');
-            $table->string('series');
-            $table->string('body_class');
-            $table->string('builder_company');
+            $table->string('series')->nullable();
+            $table->tinyInteger('body_class');
+            $table->tinyInteger('builder_company');
             $table->text('description')->nullable();
             $table->timestamps();
 
