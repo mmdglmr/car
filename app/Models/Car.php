@@ -38,9 +38,15 @@ class Car extends Model
     {
         return $this->hasOne('App\Models\CarFeature');
     }
+
     public function CarPictures()
     {
         return $this->hasMany('App\Models\CarPicture');
+    }
+
+    public function carParts()
+    {
+        return $this->belongsToMany('App\Models\CarPart', 'car_auto_part', 'car_id', 'car_part_id');
     }
 
     /*

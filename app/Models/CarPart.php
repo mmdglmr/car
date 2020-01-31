@@ -32,6 +32,11 @@ class CarPart extends Model
     {
         return $this->belongsTo('App\Models\CarPartType');
     }
+
+    public function cars()
+    {
+        return $this->belongsToMany('App\Models\Car', 'car_auto_part',  'car_part_id', 'car_id');
+    }
     /*
     |--------------------------------------------------------------------------
     | RELATIONS
