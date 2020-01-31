@@ -15,11 +15,6 @@ use App\Enums\CarBuilderCompany;
 use App\Enums\CarBodyClass;
 use App\Models\CarPicture;
 
-/**
- * Class CarCrudController
- * @package App\Http\Controllers\Admin
- * @property-read \Backpack\CRUD\app\Library\CrudPanel\CrudPanel $crud
- */
 class CarCrudController extends CrudController
 {
     use ListOperation;

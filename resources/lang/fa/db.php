@@ -1,6 +1,11 @@
 <?php
 
 return [
+    //general
+    'name' => 'نام',
+    'image' => 'عکس',
+    'description' => 'توضیحات',
+
     //car_feature table
    'engine_volume' =>  'حجم موتور',
    'engine_power' => 'قدرت موتور',
@@ -27,4 +32,9 @@ return [
    'series' => 'تیپ خودرو',
    'picture' => 'اپلود عکس',
    'description' => 'توضیحات',
+
+   //car_parts table
+   // '' => '',
+   // '' => '',
+   // '' => '',
 ];

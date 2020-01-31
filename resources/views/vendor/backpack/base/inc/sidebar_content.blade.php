@@ -7,3 +7,10 @@
         <li class='nav-item'><a class='nav-link' href='{{ backpack_url('carfeature') }}'><i class='nav-icon fa fa-sitemap'></i>  {{ __('sidebar.addCarFeature') }}</a></li>
     </ul>
 </li>
+<li class="nav-item nav-dropdown">
+    <a class="nav-link nav-dropdown-toggle" href="#"><i class="fa fa-car nav-icon"></i> {{ __('sidebar.carPart') }} </a>
+    <ul class="nav-dropdown-items">
+        <li class='nav-item'><a class='nav-link' href='{{ backpack_url('carparttype') }}'><i class='nav-icon fa fa-question'></i> {{ __('sidebar.addCarParttype') }}</a></li>
+        <li class='nav-item'><a class='nav-link' href='{{ backpack_url('carpart') }}'><i class='nav-icon fa fa-question'></i> {{ __('sidebar.addCarPart') }}</a></li>
+    </ul>
+</li>

@@ -13,11 +13,6 @@ use App\Http\Requests\RuleRequest as UpdateRequest;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 use App\Models\Car;
 
-/**
- * Class CarFeatureCrudController
- * @package App\Http\Controllers\Admin
- * @property-read \Backpack\CRUD\app\Library\CrudPanel\CrudPanel $crud
- */
 class CarFeatureCrudController extends CrudController
 {
     use ListOperation;
