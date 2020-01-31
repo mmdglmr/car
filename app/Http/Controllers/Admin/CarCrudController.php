@@ -11,8 +11,8 @@ use Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
 use App\Http\Requests\RuleRequest as StoreRequest;
 use App\Http\Requests\RuleRequest as UpdateRequest;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
-use App\Enums\CarBuilderCompanyType;
-use App\Enums\CarBodyClassType;
+use App\Enums\CarBuilderCompany;
+use App\Enums\CarBodyClass;
 use App\Models\CarPicture;
 
 /**
@@ -31,13 +31,33 @@ class CarCrudController extends CrudController
     {
         $this->crud->setModel('App\Models\Car');
         $this->crud->setRoute(config('backpack.base.route_prefix') . '/car');
-        $this->crud->setEntityNameStrings('car', 'cars');
+        $this->crud->setEntityNameStrings( __('cruds.Car'), __('cruds.Cars'));
     }
 
     protected function setupListOperation()
     {
-        // TODO: remove setFromDb() and manually define Columns, maybe Filters
-        $this->crud->setFromDb();
+        $this->crud->setColumns([
+            [
+                'label' => __('db.builder_company'),
+                'name' => 'carBuilderCompany',
+                'type' => 'text',
+            ],
+            [
+                'label' => __('db.brand'),
+                'name' => 'brand',
+                'type' => 'text',
+            ],
+            [
+                'label' => __('db.model'),
+                'name' => 'model',
+                'type' => 'text',
+            ],
+            [
+                'label' => __('db.series'),
+                'name' => 'series',
+                'type' => 'text',
+            ],
+        ]);
     }
 
     protected function setupCreateOperation()
@@ -57,8 +77,6 @@ class CarCrudController extends CrudController
     public function store()
     {
         $this->crud->request = $this->crud->validateRequest();
-        $this->crud->addField('car_features_id');
-        $this->crud->request->request->set('car_features_id', 1);
         $carPicture = $this->crud->request->picture;
         $this->crud->removeField('picture');
         $this->crud->unsetValidation();
@@ -75,10 +93,10 @@ class CarCrudController extends CrudController
     {
         return [
             'builder_company' => [
+                'label' => __('db.builder_company'),
                 'name' => 'builder_company',
-                'label' => "کمپانی سازنده",
                 'type' => 'select2_from_array',
-                'options' => CarBuilderCompanyType::getkeys(),
+                'options' => CarBuilderCompany::getkeys(),
                 'allows_null' => false,
                 'attributes' => [
                     'required' => 'required',
@@ -88,10 +106,10 @@ class CarCrudController extends CrudController
                 ],
             ],
             'body_class' => [
+                'label' => __('db.body_class'),
                 'name' => 'body_class',
-                'label' => "کلاس بدنه",
                 'type' => 'select2_from_array',
-                'options' => CarBodyClassType::getkeys(),
+                'options' => CarBodyClass::getkeys(),
                 'allows_null' => false,
                 'attributes' => [
                     'required' => 'required',
@@ -101,7 +119,7 @@ class CarCrudController extends CrudController
                 ],
             ],
             'brand' => [
-                'label' => 'کمپانی اصلی خودرو',
+                'label' => __('db.brand'),
                 'name' => 'brand',
                 'type' => 'text',
                 'attributes' => [
@@ -113,7 +131,7 @@ class CarCrudController extends CrudController
                 ],
             ],
             'model' => [
-                'label' => 'مدل خودرو',
+                'label' => __('db.model'),
                 'name' => 'model',
                 'type' => 'text',
                 'attributes' => [
@@ -125,7 +143,7 @@ class CarCrudController extends CrudController
                 ],
             ],
             'series' => [
-                'label' => 'تیپ خودرو',
+                'label' => __('db.series'),
                 'name' => 'series',
                 'type' => 'text',
                 'attributes' => [
@@ -136,8 +154,8 @@ class CarCrudController extends CrudController
                 ],
             ],
             'picture' => [
+                'label' => __('db.picture'),
                 'name' => 'picture',
-                'label' => 'اپلود عکس',
                 'type' => 'upload',
                 'upload' => true,
                 'wrapperAttributes' => [
@@ -145,9 +163,9 @@ class CarCrudController extends CrudController
                 ],
             ],
             'description' => [
+                'label' => __('db.description'),
                 'name' => 'description',
                 'type' => 'textarea',
-                'label' => 'توضیحات',
             ],
         ];
     }

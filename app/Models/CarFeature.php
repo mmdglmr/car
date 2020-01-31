@@ -34,9 +34,9 @@ class CarFeature extends Model
     | RELATIONS
     |--------------------------------------------------------------------------
     */
-    public function cars()
+    public function car()
     {
-        return $this->hasMany('App\Models\Car');
+        return $this->belongsTo('App\Models\Car');
     }
 
     /*

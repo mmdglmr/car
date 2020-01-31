@@ -15,6 +15,7 @@ class CreateCarFeaturesTable extends Migration
     {
         Schema::create('car_features', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('car_id');
             $table->string('engine_volume')->nullable();
             $table->string('engine_power')->nullable();
             $table->string('number_of_cylinders')->nullable();//teadade cylaandr
@@ -31,6 +32,8 @@ class CreateCarFeaturesTable extends Migration
             $table->text('safety')->nullable();//amniaati mese abs o kise havao
             $table->text('options')->nullable();
             $table->timestamps();
+
+            $table->foreign('car_id')->references('id')->on('cars');
         });
     }
 

@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
-
+use App\Enums\CarBuilderCompany;
 class Car extends Model
 {
     use CrudTrait;
@@ -54,7 +54,15 @@ class Car extends Model
     | ACCESSORS
     |--------------------------------------------------------------------------
     */
+    public function getFullNameAttribute()
+    {
+        return $this->brand.' '.$this->model.' '.$this->series;
+    }
 
+    public function getCarBuilderCompanyAttribute()
+    {
+        return CarBuilderCompany::getkey($this->builder_company);
+    }
     /*
     |--------------------------------------------------------------------------
     | MUTATORS

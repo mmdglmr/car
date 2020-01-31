@@ -11,6 +11,7 @@ use Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
 use App\Http\Requests\RuleRequest as StoreRequest;
 use App\Http\Requests\RuleRequest as UpdateRequest;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
+use App\Models\Car;
 
 /**
  * Class CarFeatureCrudController
@@ -28,13 +29,42 @@ class CarFeatureCrudController extends CrudController
     {
         $this->crud->setModel('App\Models\CarFeature');
         $this->crud->setRoute(config('backpack.base.route_prefix') . '/carfeature');
-        $this->crud->setEntityNameStrings('carfeature', 'car_features');
+        $this->crud->setEntityNameStrings(__('cruds.CarFeature'), __('cruds.CarFeature'));
     }
 
     protected function setupListOperation()
     {
-        // TODO: remove setFromDb() and manually define Columns, maybe Filters
-        $this->crud->setFromDb();
+        $this->crud->setColumns([
+            [
+                'label' => __('cruds.Car'),
+                'type' => "select",
+                'name' => 'car_id',
+                'orderable' => false,
+                'entity' => 'Car',
+                'attribute' => "fullName",
+                'model' => "App\Models\Car",
+            ],
+            [
+                'label' => __('db.engine_volume'),
+                'name' => 'engine_volume',
+                'type' => 'text',
+            ],
+            [
+                'label' =>  __('db.engine_power'),
+                'name' => 'engine_power',
+                'type' => 'text',
+            ],
+            [
+                'label' => __('db.acceleration'),
+                'name' => 'acceleration',
+                'type' => 'text',
+            ],
+            [
+                'label' => __('db.max_speed'),
+                'name' => 'max_speed',
+                'type' => 'text',
+            ],
+        ]);
     }
 
     protected function setupCreateOperation()
@@ -52,8 +82,18 @@ class CarFeatureCrudController extends CrudController
         protected function getFields()
         {
             return [
+                'car_id' => [
+                    'label' => __('cruds.Car'),
+                    'name' => 'car_id',
+                    'type' => 'select2_from_array',
+                    'options' => Car::all()->pluck('fullName', 'id'),
+                    'allows_null' => false,
+                    'attributes' => [
+                        'required' => 'required',
+                    ],
+                ],
                 'engine_volume' => [
-                    'label' => 'حجم موتور',
+                    'label' => __('db.engine_volume'),
                     'name' => 'engine_volume',
                     'type' => 'text',
                     'wrapperAttributes' => [
@@ -61,7 +101,7 @@ class CarFeatureCrudController extends CrudController
                     ],
                 ],
                 'engine_power' => [
-                    'label' => 'قدرت موتور',
+                    'label' =>  __('db.engine_power'),
                     'name' => 'engine_power',
                     'type' => 'text',
                     'wrapperAttributes' => [
@@ -69,7 +109,7 @@ class CarFeatureCrudController extends CrudController
                     ],
                 ],
                 'number_of_cylinders' => [
-                    'label' => 'تعداد سیلندر',
+                    'label' => __('db.number_of_cylinders'),
                     'name' => 'number_of_cylinders',
                     'type' => 'text',
                     'wrapperAttributes' => [
@@ -77,7 +117,7 @@ class CarFeatureCrudController extends CrudController
                     ],
                 ],
                 'number_of_valves' => [
-                    'label' => 'تعداد سوپاپ',
+                    'label' => __('db.number_of_valves'),
                     'name' => 'number_of_valves',
                     'type' => 'text',
                     'wrapperAttributes' => [
@@ -85,7 +125,7 @@ class CarFeatureCrudController extends CrudController
                     ],
                 ],
                 'torque' => [
-                    'label' => 'گشتاور',
+                    'label' => __('db.torque'),
                     'name' => 'torque',
                     'type' => 'text',
                     'wrapperAttributes' => [
@@ -93,7 +133,7 @@ class CarFeatureCrudController extends CrudController
                     ],
                 ],
                 'acceleration' => [
-                    'label' => 'شتاب',
+                    'label' => __('db.acceleration'),
                     'name' => 'acceleration',
                     'type' => 'text',
                     'wrapperAttributes' => [
@@ -101,7 +141,7 @@ class CarFeatureCrudController extends CrudController
                     ],
                 ],
                 'max_speed' => [
-                    'label' => 'حداکثر سرعت',
+                    'label' => __('db.max_speed'),
                     'name' => 'max_speed',
                     'type' => 'text',
                     'wrapperAttributes' => [
@@ -109,7 +149,7 @@ class CarFeatureCrudController extends CrudController
                     ],
                 ],
                 'gearbox' => [
-                    'label' => 'گیربکس',
+                    'label' => __('db.gearbox'),
                     'name' => 'gearbox',
                     'type' => 'text',
                     'wrapperAttributes' => [
@@ -117,7 +157,7 @@ class CarFeatureCrudController extends CrudController
                     ],
                 ],
                 'differential' => [
-                    'label' => 'دیفرانسیل',
+                    'label' => __('db.differential'),
                     'name' => 'differential',
                     'type' => 'text',
                     'wrapperAttributes' => [
@@ -125,7 +165,7 @@ class CarFeatureCrudController extends CrudController
                     ],
                 ],
                 'car_dimensions' => [
-                    'label' => 'ابعاد خودرو',
+                    'label' => __('db.car_dimensions'),
                     'name' => 'car_dimensions',
                     'type' => 'text',
                     'wrapperAttributes' => [
@@ -133,44 +173,35 @@ class CarFeatureCrudController extends CrudController
                     ],
                 ],
                 'axis_spacing' => [
-                    'label' => 'فاصله محور',
+                    'label' => __('db.axis_spacing'),
                     'name' => 'axis_spacing',
                     'type' => 'text',
                     'wrapperAttributes' => [
                         'class' => 'form-group col-md-6',
                     ],
                 ],
-                'fuel_consumption' => [
-                    'label' => 'مصرف سوخت',
-                    'name' => 'fuel_consumption',
-                    'type' => 'text',
-                    'wrapperAttributes' => [
-                        'class' => 'form-group col-md-6',
-                    ],
-                ],
                 'fuel_tank_capacity' => [
-                    'label' => 'حجم باک',
+                    'label' => __('db.fuel_tank_capacity'),
                     'name' => 'fuel_tank_capacity',
                     'type' => 'text',
                     'wrapperAttributes' => [
                         'class' => 'form-group col-md-6',
                     ],
                 ],
+                'fuel_consumption' => [
+                    'label' => __('db.fuel_consumption'),
+                    'name' => 'fuel_consumption',
+                    'type' => 'text',
+                ],
                 'safety' => [
+                    'label' => __('db.safety'),
                     'name' => 'safety',
                     'type' => 'textarea',
-                    'label' => 'امنیبت',
-                    'wrapperAttributes' => [
-                        'class' => 'form-group col-md-6',
-                    ],
                 ],
                 'options' => [
+                    'label' => __('db.options'),
                     'name' => 'options',
                     'type' => 'textarea',
-                    'label' => 'امکانات',
-                    'wrapperAttributes' => [
-                        'class' => 'form-group col-md-6',
-                    ],
                 ],
             ];
     }

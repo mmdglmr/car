@@ -9,7 +9,7 @@ use BenSampo\Enum\Enum;
  * @method static static OptionTwo()
  * @method static static OptionThree()
  */
-final class CarBuilderCompanyType extends Enum
+final class CarBuilderCompany extends Enum
 {
     const IranKhodro = 0;
     const Saipa = 1;

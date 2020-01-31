@@ -9,7 +9,7 @@ use BenSampo\Enum\Enum;
  * @method static static OptionTwo()
  * @method static static OptionThree()
  */
-final class CarBodyClassType extends Enum
+final class CarBodyClass extends Enum
 {
     const Hatchback = 0;
     const Sedan = 1;
