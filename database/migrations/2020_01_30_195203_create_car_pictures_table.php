@@ -16,7 +16,7 @@ class CreateCarPicturesTable extends Migration
         Schema::create('car_pictures', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('car_id');
-            $table->string('picture')->nullable();
+            $table->string('picture');
             $table->boolean('primary')->default(0);
             $table->timestamps();
 

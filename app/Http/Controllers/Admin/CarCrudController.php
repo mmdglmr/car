@@ -13,6 +13,7 @@ use App\Http\Requests\RuleRequest as UpdateRequest;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 use App\Enums\CarBuilderCompanyType;
 use App\Enums\CarBodyClassType;
+use App\Models\CarPicture;
 
 /**
  * Class CarCrudController
@@ -58,8 +59,15 @@ class CarCrudController extends CrudController
         $this->crud->request = $this->crud->validateRequest();
         $this->crud->addField('car_features_id');
         $this->crud->request->request->set('car_features_id', 1);
+        $carPicture = $this->crud->request->picture;
+        $this->crud->removeField('picture');
         $this->crud->unsetValidation();
         $redirect_location = $this->traitStore();
+        CarPicture::firstOrCreate([
+            'car_id' => $this->crud->entry->id,
+            'primary' => 1,
+            'picture' => $carPicture,
+        ]);
         return $redirect_location;
     }
 
@@ -127,13 +135,19 @@ class CarCrudController extends CrudController
                     'class' => 'form-group col-md-6',
                 ],
             ],
+            'picture' => [
+                'name' => 'picture',
+                'label' => 'اپلود عکس',
+                'type' => 'upload',
+                'upload' => true,
+                'wrapperAttributes' => [
+                    'class' => 'form-group col-md-6',
+                ],
+            ],
             'description' => [
                 'name' => 'description',
                 'type' => 'textarea',
                 'label' => 'توضیحات',
-                'wrapperAttributes' => [
-                    'class' => 'form-group col-md-6',
-                ],
             ],
         ];
     }
