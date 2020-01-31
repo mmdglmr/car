@@ -35,13 +35,17 @@ class CarPartCrudController extends CrudController
                 'type' => 'text',
             ],
             [
-                'label' => __('db.image'),
-                'name' => 'picture',
-                'type' => 'text',
+                'label' => __('cruds.CarPartType'),
+                'type' => "select",
+                'name' => 'car_part_type_id',
+                'orderable' => true,
+                'entity' => 'CarPartType',
+                'attribute' => "name",
+                'model' => "App\Models\CarPartType",
             ],
             [
-                'label' => __('db.description'),
-                'name' => 'description',
+                'label' => __('db.image'),
+                'name' => 'picture',
                 'type' => 'text',
             ],
         ]);

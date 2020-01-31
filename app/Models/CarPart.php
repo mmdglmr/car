@@ -30,7 +30,7 @@ class CarPart extends Model
     */
     public function carPartType()
     {
-        return $this->hasOne('App\Models\CarPartType');
+        return $this->belongsTo('App\Models\CarPartType');
     }
     /*
     |--------------------------------------------------------------------------

@@ -36,7 +36,7 @@ class CarPartType extends Model
     */
     public function carParts()
     {
-        return $this->belongsToMany('App\Modles\CarPart');
+        return $this->hasMany('App\Modles\CarPart');
     }
 
     /*
