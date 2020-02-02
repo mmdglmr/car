@@ -76,11 +76,30 @@ class CarCrudController extends CrudController
         $this->crud->removeField('picture');
         $this->crud->unsetValidation();
         $redirect_location = $this->traitStore();
-        CarPicture::firstOrCreate([
-            'car_id' => $this->crud->entry->id,
-            'primary' => 1,
-            'picture' => $carPicture,
-        ]);
+        if ($carPicture != null) {
+            CarPicture::firstOrCreate([
+                'car_id' => $this->crud->entry->id,
+                'primary' => 1,
+                'picture' => $carPicture,
+            ]);
+        }
+        return $redirect_location;
+    }
+
+    public function update()
+    {
+        $this->crud->request = $this->crud->validateRequest();
+        $carPicture = $this->crud->request->picture;
+        $this->crud->removeField('picture');
+        $this->crud->unsetValidation();
+        $redirect_location = $this->traitStore();
+        if ($carPicture != null) {
+            CarPicture::firstOrCreate([
+                'car_id' => $this->crud->entry->id,
+                'primary' => 1,
+                'picture' => $carPicture,
+            ]);
+        }
         return $redirect_location;
     }
 

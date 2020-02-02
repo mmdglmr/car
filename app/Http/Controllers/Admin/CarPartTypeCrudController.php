@@ -35,7 +35,9 @@ class CarPartTypeCrudController extends CrudController
             [
                 'label' => __('db.image'),
                 'name' => 'picture',
-                'type' => 'text',
+                'type' => 'image',
+                'height' => '100px',
+                'width' => '100px'
             ],
             [
                 'label' => __('db.description'),

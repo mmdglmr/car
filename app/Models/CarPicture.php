@@ -55,4 +55,18 @@ class CarPicture extends Model
     | MUTATORS
     |--------------------------------------------------------------------------
     */
+    public function setPictureAttribute($image)
+    {
+        if ($image) {
+            $path = '/uploads/products/'.$this->id.'/';
+            if (!file_exists(public_path().$path)) {
+                mkdir(public_path().$path, 0775, true);
+            }
+            $img = \Image::make($image->getRealPath());
+            $img->resize(750, 450, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save(public_path().$path.$image->getClientOriginalName());
+            $this->attributes['picture'] = $path.$image->getClientOriginalName();
+        }
+    }
 }

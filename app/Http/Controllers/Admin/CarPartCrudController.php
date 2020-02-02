@@ -46,7 +46,9 @@ class CarPartCrudController extends CrudController
             [
                 'label' => __('db.image'),
                 'name' => 'picture',
-                'type' => 'text',
+                'type' => 'image',
+                'height' => '100px',
+                'width' => '100px'
             ],
         ]);
     }
@@ -78,6 +80,15 @@ class CarPartCrudController extends CrudController
                 'wrapperAttributes' => [
                     'class' => 'form-group col-md-12',
                 ],
+            ],
+            [
+                'label' => __('cruds.Car'),
+                'type' => 'select2_multiple',
+                'name' => 'cars',
+                'entity' => 'cars',
+                'attribute' => 'fullName',
+                'model' => "App\Models\Car",
+                'pivot' => true,
             ],
             'name' => [
                 'label' => __('db.name'),
