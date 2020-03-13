@@ -73,5 +73,5 @@ class CarPart extends Model
             })->save(public_path().$path.$image->getClientOriginalName());
             $this->attributes['picture'] = $path.$image->getClientOriginalName();
         }
-    }
+    }   
 }
